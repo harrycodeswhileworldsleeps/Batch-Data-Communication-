@@ -34,6 +34,23 @@ Does everything manually
 ![image](https://github.com/harrycodeswhileworldsleeps/Batch-Data-Communication-/assets/94862735/d368ffe7-0b03-49c2-bb2e-26ec0fb0b018)
 
 Created entries ! 
+2 ways to do BDC are: - 
+
+Call Transaction Method 
+For this refer to the program - ZSLS_ORG_BDC
+
+Session Metod 
+
+Here 3 standard FM are used
+1. BDC_INSERT 
+2. BDC_OPEN_GROUP 
+3. BDC_CLOSE_GROUP
+
+Also subroutines BDC_DYNPRO and BDC_FIELD are important to mention. 
+
+SM35 is the T code to check your batch input sessions 
+
+![image](https://github.com/harrycodeswhileworldsleeps/Batch-Data-Communication-/assets/94862735/2245a776-ed7d-4a7b-b2cd-054d419da1a9)
 
 
 
