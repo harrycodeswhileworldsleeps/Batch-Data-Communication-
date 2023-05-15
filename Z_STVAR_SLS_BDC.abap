@@ -5,7 +5,6 @@ report z_stvar_sls_bdc.
 "Structure for insertion.
 types: begin of ty_var,
          var_low  type tvarvc-low,
-         var_high type tvarvc-high,
        end of ty_var.
 
 "data declaration for inputs
@@ -18,7 +17,7 @@ data: wa_bdc type bdcdata,
 
 "selection screen for providing path
 selection-screen begin of block blk2 with frame title text-001.
-parameters: p_file TYPE STRING default '/SAPMFG/data/BDCI_Items.dat'.
+parameters: p_file type string default '/SAPMFG/data/BDCI_Items.dat'.
 selection-screen end of block blk2.
 
 data(file_name) = p_file.
@@ -112,16 +111,18 @@ form insert_data.
                                   'I_TVARVC_SELOPS-NAME(01)'.
     perform bdc_dynpro      using 'SAPMS38V' '1100'.
     perform bdc_field       using 'BDC_OKCODE'
-                                  '=SAVE'.
+                                  '=MORE'.
     perform bdc_field       using 'BDC_CURSOR'
-                                  'I_TVARVC_SELOPS-HIGH(01)'.
-    perform bdc_field       using 'I_TVARVC_SELOPS-LOW(01)'
-                                  wa_var-var_low.
-    perform bdc_field       using 'I_TVARVC_SELOPS-HIGH(01)'
-                                  wa_var-var_high.
-    perform bdc_dynpro      using 'SAPMS38V' '1100'.
+                                  'I_TVARVC_SELOPS-MULT(01)'.
+    perform bdc_dynpro      using 'SAPLALDB' '3000'.
     perform bdc_field       using 'BDC_OKCODE'
-                                  '=ENTER'.
+                                  '=ACPT'.
+    perform bdc_field       using 'BDC_CURSOR'
+                                  'RSCSEL_255-SLOW_I(02)'.
+    perform bdc_field       using 'RSCSEL_255-SLOW_I(01)'
+                                  wa_var-var_low.
+    perform bdc_field       using 'BDC_OKCODE'
+                                  '=SAVE'.
     call transaction 'STVARV' using it_bdc.
     refresh it_bdc.
   endloop.
